@@ -1,0 +1,24 @@
+{
+  "name": "node-syncthing",
+  "version": "1.0.0",
+  "description": "Lightweight asynchronous Syncthing integration for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JodusNodus/node-syncthing.git"
+  },
+  "keywords": [
+    "syncthing",
+    "nodejs",
+    "api"
+  ],
+  "author": "thomas billiet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JodusNodus/node-syncthing/issues"
+  },
+  "homepage": "https://github.com/JodusNodus/node-syncthing#readme"
+}
