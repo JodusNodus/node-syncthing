@@ -1,7 +1,7 @@
 # Node Syncthing
 Lightweight asynchronous [Syncthing](http://syncthing.net/) integration for nodejs.
 
-##Usage:
+## Usage:
 `var syncthing = require('node-syncthing');`
 
 #### 1. Initiate connection
