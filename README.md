@@ -1,6 +1,8 @@
 # Node Syncthing
 Lightweight asynchronous [Syncthing](http://syncthing.net/) integration for nodejs.
 
+## Install:
+`npm install node-syncthing --save`
 ## Usage:
 `var syncthing = require('node-syncthing');`
 
