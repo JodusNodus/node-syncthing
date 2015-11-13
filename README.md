@@ -21,13 +21,43 @@ Callback: _function_
 #### 2. Actions
 `syncthing.endpoint.action(options, callback);`
 
-Endpoint:
-* System
-* Database
-* Statistics
-* Misc
+example: `syncthing.db.status( folder, callback );`
 
-Action:
-* ex. ping
+Information about options: [Syncthing API](http://docs.syncthing.net/dev/rest.html)
 
+Endpoints: _endpoint/actions (options)_
+* System _(system)_
+  - ping
+  - shutdown
+  - restart
+  - version
+  - status
+  - connections
+  - getConfig
+  - setConfig _(config)_
+  - debug
+  - getDiscovery
+  - setDiscovery _(device, address)_
+  - errors
+  - clearErrors
+  - logs
+  - getUpgrade
+  - setUpgrade
+* Database _(db)_
+  - scan _(folder)_
+  - status _(folder)_
+  - browse _(folder, levels, subdir) subdir comes behind callback!_
+  - completion _(device, folder)_
+  - file _(folder, file)_
+  - getIgnores
+  - setIgnores _(folder, ignores)_
+  - need _(folder)_
+  - prio _(folder, file)_
+* Statistics _(stats)_
+  - devices
+  - folders
+* Misc _(misc)_
+  - folders _(device)_
+  - lang
+  - report
 - - -

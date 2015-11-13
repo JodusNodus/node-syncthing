@@ -149,7 +149,7 @@ module.exports = {
         callback(res);
       });
     },
-    upgrade: function (callback) {
+    setUpgrade: function (callback) {
       request("system/upgrade", "POST", function (res) {
         callback(res);
       });
@@ -222,8 +222,8 @@ module.exports = {
     },
   },
   misc: {
-    folders: function (id, callback) {
-      request("svc/deviceid?id="+id, "GET", function (res) {
+    folders: function (device, callback) {
+      request("svc/deviceid?id="+device, "GET", function (res) {
         callback(res);
       });
     },
