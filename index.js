@@ -157,7 +157,7 @@ module.exports = {
   },
   //DB
   db: {
-    rescan: function (folder, callback) {
+    scan: function (folder, callback) {
       request("db/scan?folder="+folder, "POST", function () {
         callback();
       });
@@ -184,9 +184,58 @@ module.exports = {
       });
     },
     file: function (folder, file, callback) {
-      request("db/file?folder="+device+"&file="+file, "GET", function (res) {
+      request("db/file?folder="+folder+"&file="+file, "GET", function (res) {
+        callback(res);
+      });
+    },
+    getIgnores: function (folder, callback) {
+      request("db/ignores?folder="+folder, "GET", function (res) {
+        callback(res);
+      });
+    },
+    setIgnores: function (folder, ingores, callback) {
+      request("db/ignores?folder="+folder, "POST", function (res) {
+        callback(res);
+      }, ignores);
+    },
+    need: function (folder, callback) {
+      request("db/ignores?folder="+folder, "GET", function (res) {
+        callback(res);
+      });
+    },
+    prio: function (folder, file, callback) {
+      request("db/ignores?folder="+folder+"&file="+file, "POST", function (res) {
         callback(res);
       });
     },
   },
+  stats: {
+    devices: function (callback) {
+      request("stats/device", "GET", function (res) {
+        callback(res);
+      });
+    },
+    folders: function (callback) {
+      request("stats/folder", "GET", function (res) {
+        callback(res);
+      });
+    },
+  },
+  misc: {
+    folders: function (id, callback) {
+      request("svc/deviceid?id="+id, "GET", function (res) {
+        callback(res);
+      });
+    },
+    lang: function (callback) {
+      request("svc/lang", "GET", function (res) {
+        callback(res);
+      });
+    },
+    report: function (callback) {
+      request("svc/report", "GET", function (res) {
+        callback(res);
+      });
+    }
+  }
 };
