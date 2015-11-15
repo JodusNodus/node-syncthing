@@ -60,4 +60,20 @@ Endpoints: _endpoint/actions (options)_
   - folders _(device)_
   - lang
   - report
+
+The actions return a callback containing:
+* Data argument:
+  - status: **http status code**
+  - id: **syncthing id**
+  - version: **syncthing version**
+  - date: **ex.** _(Thu, 01 Jan 1970 00:00:00 GMT-0400)_
+  - body: **api response**
+* An argument for every option that has been given when calling the action containing the original send option.
+  - ex.
+  ````
+  syncthing.db.browse("randomFolder", 0, function(data, folder, levels){
+     console.log(folder+", "+levels);
+    });
+  ````
+  this would log: `randomFolder, 0`
 - - -

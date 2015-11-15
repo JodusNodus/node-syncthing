@@ -43,7 +43,6 @@ function request(path, method, callback, data) {
         id: res.headers["x-syncthing-id"],
         version: res.headers["x-syncthing-version"],
         date: res.headers.date,
-        connection: res.headers.connection,
         body: {}
       };
       res.on('data', function (chunk) {
@@ -106,7 +105,7 @@ module.exports = {
     },
     setConfig: function (config, callback) {
       request("system/config", "POST", function (res) {
-        callback(res);
+        callback(res, config);
       }, config);
     },
     getConfig: function (callback) {
@@ -126,7 +125,7 @@ module.exports = {
     },
     setDiscovery: function (device, address, callback) {
       request("system/discovery?device="+device+"&addr="+address, "POST", function (res) {
-        callback(res);
+        callback(res, device, address);
       });
     },
     errors: function (callback) {
@@ -149,7 +148,7 @@ module.exports = {
         callback(res);
       });
     },
-    setUpgrade: function (callback) {
+    upgrade: function (callback) {
       request("system/upgrade", "POST", function (res) {
         callback(res);
       });
@@ -159,12 +158,12 @@ module.exports = {
   db: {
     scan: function (folder, callback) {
       request("db/scan?folder="+folder, "POST", function () {
-        callback();
+        callback(folder);
       });
     },
     status: function (folder, callback) {
       request("db/status?folder="+folder, "GET", function (res) {
-        callback(res);
+        callback(res, folder);
       });
     },
     browse: function (folder, levels, callback, subdir) {
@@ -175,37 +174,37 @@ module.exports = {
         urlTail = "db/browse?folder="+folder+"&levels="+levels;
       }
       request(urlTail, "GET", function (res) {
-        callback(res);
+        callback(res, folder, levels, subdir);
       });
     },
     completion: function (device, folder, callback) {
       request("db/completion?device="+device+"&folder="+folder, "GET", function (res) {
-        callback(res);
+        callback(res, device, folder);
       });
     },
     file: function (folder, file, callback) {
       request("db/file?folder="+folder+"&file="+file, "GET", function (res) {
-        callback(res);
+        callback(res, folder, file);
       });
     },
     getIgnores: function (folder, callback) {
       request("db/ignores?folder="+folder, "GET", function (res) {
-        callback(res);
+        callback(res, folder);
       });
     },
     setIgnores: function (folder, ingores, callback) {
       request("db/ignores?folder="+folder, "POST", function (res) {
-        callback(res);
+        callback(res, folder, ingores);
       }, ignores);
     },
     need: function (folder, callback) {
       request("db/ignores?folder="+folder, "GET", function (res) {
-        callback(res);
+        callback(res, folder);
       });
     },
     prio: function (folder, file, callback) {
       request("db/ignores?folder="+folder+"&file="+file, "POST", function (res) {
-        callback(res);
+        callback(res, folder, file);
       });
     },
   },
@@ -222,9 +221,9 @@ module.exports = {
     },
   },
   misc: {
-    folders: function (device, callback) {
-      request("svc/deviceid?id="+device, "GET", function (res) {
-        callback(res);
+    folders: function (id, callback) {
+      request("svc/deviceid?id="+id, "GET", function (res) {
+        callback(res, id);
       });
     },
     lang: function (callback) {
