@@ -5,7 +5,7 @@ var options = {
   apikey: "abc123"
 };
 syncthing.init(options, function (res) {
-  syncthing.system.ping(function (res) {
-    console.log(res);
-  });
+    syncthing.system.ping(function (res) {
+      console.log(res);
+    });
 });

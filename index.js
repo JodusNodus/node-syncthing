@@ -65,7 +65,7 @@ module.exports = {
   //SYSTEM
   init: function (options, callback) {
     if (setConfig(options)) {
-      request("system/ping", "GET", function (res) {
+      new request("system/ping", "GET", function (res) {
         callback(true);
       });
     }else {
@@ -74,82 +74,82 @@ module.exports = {
   },
   system: {
     ping: function (callback) {
-      request("system/ping", "GET", function (res) {
+      new request("system/ping", "GET", function (res) {
         callback(res);
       });
     },
     shutdown: function (callback) {
-      request("system/shutdown", "POST", function () {
+     new request("system/shutdown", "POST", function () {
         callback();
       });
     },
     restart: function (callback) {
-      request("system/restart", "POST", function () {
+     new request("system/restart", "POST", function () {
         callback();
       });
     },
     version: function (callback) {
-      request("system/version", "GET", function (res) {
+     new request("system/version", "GET", function (res) {
         callback(res);
       });
     },
     status: function (callback) {
-      request("system/status", "GET", function (res) {
+     new request("system/status", "GET", function (res) {
         callback(res);
       });
     },
     connections: function (callback) {
-      request("system/connections", "GET", function (res) {
+     new request("system/connections", "GET", function (res) {
         callback(res);
       });
     },
     setConfig: function (config, callback) {
-      request("system/config", "POST", function (res) {
+     new request("system/config", "POST", function (res) {
         callback(res, config);
       }, config);
     },
     getConfig: function (callback) {
-      request("system/config", "GET", function (res) {
+     new request("system/config", "GET", function (res) {
         callback(res);
       });
     },
     debug: function (callback) {
-      request("system/debug", "GET", function (res) {
+     new request("system/debug", "GET", function (res) {
         callback(res);
       });
     },
     getDiscovery: function (callback) {
-      request("system/discovery", "GET", function (res) {
+     new request("system/discovery", "GET", function (res) {
         callback(res);
       });
     },
     setDiscovery: function (device, address, callback) {
-      request("system/discovery?device="+device+"&addr="+address, "POST", function (res) {
+     new request("system/discovery?device="+device+"&addr="+address, "POST", function (res) {
         callback(res, device, address);
       });
     },
     errors: function (callback) {
-      request("system/error", "GET", function (res) {
+     new request("system/error", "GET", function (res) {
         callback(res);
       });
     },
     clearErrors: function (callback) {
-      request("system/error/clear", "POST", function (res) {
+     new request("system/error/clear", "POST", function (res) {
         callback(res);
       });
     },
     logs: function (callback) {
-      request("system/log", "GET", function (res) {
+     new request("system/log", "GET", function (res) {
         callback(res);
       });
     },
     getUpgrade: function (callback) {
-      request("system/upgrade", "GET", function (res) {
+     new request("system/upgrade", "GET", function (res) {
         callback(res);
       });
     },
     upgrade: function (callback) {
-      request("system/upgrade", "POST", function (res) {
+     new request("system/upgrade", "POST", function (res) {
         callback(res);
       });
     }
@@ -157,12 +157,12 @@ module.exports = {
   //DB
   db: {
     scan: function (folder, callback) {
-      request("db/scan?folder="+folder, "POST", function () {
+    new  request("db/scan?folder="+folder, "POST", function () {
         callback(folder);
       });
     },
     status: function (folder, callback) {
-      request("db/status?folder="+folder, "GET", function (res) {
+     new request("db/status?folder="+folder, "GET", function (res) {
         callback(res, folder);
       });
     },
@@ -178,61 +178,61 @@ module.exports = {
       });
     },
     completion: function (device, folder, callback) {
-      request("db/completion?device="+device+"&folder="+folder, "GET", function (res) {
+     new request("db/completion?device="+device+"&folder="+folder, "GET", function (res) {
         callback(res, device, folder);
       });
     },
     file: function (folder, file, callback) {
-      request("db/file?folder="+folder+"&file="+file, "GET", function (res) {
+     new request("db/file?folder="+folder+"&file="+file, "GET", function (res) {
         callback(res, folder, file);
       });
     },
     getIgnores: function (folder, callback) {
-      request("db/ignores?folder="+folder, "GET", function (res) {
+     new request("db/ignores?folder="+folder, "GET", function (res) {
         callback(res, folder);
       });
     },
     setIgnores: function (folder, ingores, callback) {
-      request("db/ignores?folder="+folder, "POST", function (res) {
+     new request("db/ignores?folder="+folder, "POST", function (res) {
         callback(res, folder, ingores);
       }, ignores);
     },
     need: function (folder, callback) {
-      request("db/ignores?folder="+folder, "GET", function (res) {
+     new request("db/ignores?folder="+folder, "GET", function (res) {
         callback(res, folder);
       });
     },
     prio: function (folder, file, callback) {
-      request("db/ignores?folder="+folder+"&file="+file, "POST", function (res) {
+     new request("db/ignores?folder="+folder+"&file="+file, "POST", function (res) {
         callback(res, folder, file);
       });
     },
   },
   stats: {
     devices: function (callback) {
-      request("stats/device", "GET", function (res) {
+     new request("stats/device", "GET", function (res) {
         callback(res);
       });
     },
     folders: function (callback) {
-      request("stats/folder", "GET", function (res) {
+     new request("stats/folder", "GET", function (res) {
         callback(res);
       });
     },
   },
   misc: {
     folders: function (id, callback) {
-      request("svc/deviceid?id="+id, "GET", function (res) {
+     new request("svc/deviceid?id="+id, "GET", function (res) {
         callback(res, id);
       });
     },
     lang: function (callback) {
-      request("svc/lang", "GET", function (res) {
+     new request("svc/lang", "GET", function (res) {
         callback(res);
       });
     },
     report: function (callback) {
-      request("svc/report", "GET", function (res) {
+     new request("svc/report", "GET", function (res) {
         callback(res);
       });
     }
