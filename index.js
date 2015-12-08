@@ -47,7 +47,7 @@ function request(path, method, callback, data) {
       };
       res.on('data', function (chunk) {
         response.body = JSON.parse(chunk);
-        callback(err, response);
+        callback(null, response);
       });
     });
     req.on('error', function(err) {
