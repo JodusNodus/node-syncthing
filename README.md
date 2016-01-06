@@ -1,17 +1,14 @@
-# Node Syncthing
-Lightweight [Syncthing](http://syncthing.net/) wrapper with promises and callbacks.
-
 ## Install:
 `npm i node-syncthing --save`
 ## Usage:
 ```
 var NS = require('node-syncthing');
-var st = new NS(options);
+var syncthing = new NS(options);
 ```
 
 Options: _object_
-* hostname: **domain** or **ip address** _(defaults to 'localhost')_
-* port: **port number** _(defaults to '8384')_
+* hostname: **domain** or **ip address** _(defaults to localhost)_
+* port: **port number** _(defaults to 8384)_
 * apiKey: **full API key** _(not necessary for non authenticated requests)_
 
 ### Methods
@@ -76,14 +73,14 @@ const st = new NS(options);
 //With Callback
 st.system.ping(function (err, res) {
   if (!err) {
-    console.log(res.ping);
+    console.log(res.ping); //pong
   }else {
     console.log(err);
   }
 });
 //With Promises
 st.system.ping().then(function (res) {
-  console.log(res.ping);
+  console.log(res.ping); //pong
 }).catch(function (err) {
   console.log(err);
 });
