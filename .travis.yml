@@ -10,7 +10,7 @@ before_install:
   - echo "Test" > $HOME/Sync/test.txt
   - sudo wget https://gist.githubusercontent.com/arudmin/5a13e9105814c3f568ec/raw/730c442936180620e2a715ac6e13498c37e571c4/syncthing -O /etc/init.d/syncthing
   - sudo chmod +x /etc/init.d/syncthing
-  - sudo update.rc /etc/init.d/syncthing defaults
+  - sudo update-rc.d /etc/init.d/syncthing defaults
 node_js:
   - "5.3.0"
 before_script:
