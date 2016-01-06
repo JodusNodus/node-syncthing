@@ -8,7 +8,7 @@ before_install:
   - sudo apt-get install syncthing -y -qq
   - mkdir $HOME/Sync
   - echo "Test" > $HOME/Sync/test.txt
-  - sudo wget https://gist.githubusercontent.com/arudmin/5a13e9105814c3f568ec/raw/730c442936180620e2a715ac6e13498c37e571c4/syncthing -O /etc/init.d/syncthing
+  - sudo wget https://gist.githubusercontent.com/JodusNodus/7b503b73a8c8a153347d/raw/69d97274cd11baece32b76e715eb7c86c278e23c/syncthing -O /etc/init.d/syncthing
   - sudo chmod +x /etc/init.d/syncthing
   - sudo update-rc.d syncthing defaults
   - sudo /etc/init.d/syncthing stop
