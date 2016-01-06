@@ -6,10 +6,10 @@ test.createStream().pipe(tapSpec()).pipe(process.stdout);
 const example = {
   hostname: "localhost",
   port: 8384,
-  apiKey: "19A5pMYGNr0SOqzL9xoyJp7JuRbwzZq2",
-  folder: "test",
+  apiKey: "6aYKYQPRV2c6guLXlGFluWaBud",
+  folder: "default",
   file: "test.txt",
-  device: "EAKPTM4-AUYZZXF-4FSD2EH-MPJ23T4-7QPXIOM-MYBKIAG-SP4SZCG-IWHCNA4"
+  device: "KRQBQWV-KMPEWLV-LBQC5PE-I345CWF-JRQHAAZ-UFSBZY6-A57BO2R-SHLKDA6"
 }
 const st = new NS(example);
 test("Callback", function (t) {
