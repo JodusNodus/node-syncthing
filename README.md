@@ -1,31 +1,27 @@
 # Node Syncthing
-Lightweight asynchronous [Syncthing](http://syncthing.net/) integration for nodejs.
+Lightweight [Syncthing](http://syncthing.net/) wrapper with promises and callbacks.
 
 ## Install:
-`npm install node-syncthing --save`
+`npm i node-syncthing --save`
 ## Usage:
-`var syncthing = require('node-syncthing');`
-
-#### 1. Initiate connection
-`syncthing.init(options, callback);`
+```
+var NS = require('node-syncthing');
+var st = new NS(options);
+```
 
 Options: _object_
 * hostname: **domain** or **ip address** _(defaults to 'localhost')_
 * port: **port number** _(defaults to '8384')_
-* apikey: **full API key**
+* apiKey: **full API key** _(not necessary for non authenticated requests)_
 
-Callback: _function_
-* Function containing a single argument which returns __true__ or __false__ depending on the success of the initiation.
+### Methods
+Using callbacks: `syncthing.endpoint.method(options, callback);`
 
-- - -
-#### 2. Actions
-`syncthing.endpoint.action(options, callback);`
-
-example: `syncthing.db.status( folder, callback );`
+Using promises: `syncthing.endpoint.method(options).then(responseHandler).catch(errorHandler);`
 
 Information about options: [Syncthing API](http://docs.syncthing.net/dev/rest.html)
 
-Endpoints: _endpoint/actions (options)_
+Endpoints: _endpoint/method (options)_
 * System _(system)_
   - ping
   - shutdown
@@ -46,11 +42,11 @@ Endpoints: _endpoint/actions (options)_
 * Database _(db)_
   - scan _(folder)_
   - status _(folder)_
-  - browse _(folder, levels, subdir) subdir comes behind callback!_
+  - browse _(folder, levels, optionally a subdir)_
   - completion _(device, folder)_
   - file _(folder, file)_
   - getIgnores
-  - setIgnores _(folder, ignores)_
+  - setIgnores _(folder, optionally ignores)_
   - need _(folder)_
   - prio _(folder, file)_
 * Statistics _(stats)_
@@ -61,8 +57,46 @@ Endpoints: _endpoint/actions (options)_
   - lang
   - report
 
-The actions return a callback containing:
-* Error argument _(returns the error or null if there was none)_
-* Data argument _(api response)_
+Data and errors can be handled with callbacks or with promises:
+* Promises _(Provide no callback function)_
+* Callback _(Provide a callback function as the last argument in the method)_
+  - Error argument _(returns the error or null if there was none)_
+  - Data argument _(api response)_
 
-- - -
+## Example:
+```
+var NS = require('./index.js');
+//Options
+var options = {
+  hostname: "localhost",
+  port: 8384,
+  apiKey: "abc123"
+};
+const st = new NS(options);
+//With Callback
+st.system.ping(function (err, res) {
+  if (!err) {
+    console.log(res.ping);
+  }else {
+    console.log(err);
+  }
+});
+//With Promises
+st.system.ping().then(function (res) {
+  console.log(res.ping);
+}).catch(function (err) {
+  console.log(err);
+});
+```
+
+## Dev
+
+### Build
+
+`npm i`
+
+`npm run build`
+
+### Test
+
+`npm test`
