@@ -1,0 +1,19 @@
+language: node_js
+sudo: required
+before_install:
+  # Install Syncthing
+  - curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
+  - echo "deb http://apt.syncthing.net/ syncthing release" | sudo tee /etc/apt/sources.list.d/syncthing.list
+  - sudo apt-get update -qq
+  - sudo apt-get install syncthing -y -qq
+node_js:
+  - "5.3.0"
+before_script:
+  - echo "Test" > $HOME/Sync/test.txt
+  - "npm install"
+  - "npm run build"
+script:
+  - "npm test"
+cache:
+  directories:
+    - node_modules
