@@ -6,6 +6,7 @@ before_install:
   - echo "deb http://apt.syncthing.net/ syncthing release" | sudo tee /etc/apt/sources.list.d/syncthing.list
   - sudo apt-get update -qq
   - sudo apt-get install syncthing -y -qq
+  - sudo /etc/init.d/syncthing start
 node_js:
   - "5.3.0"
 before_script:
