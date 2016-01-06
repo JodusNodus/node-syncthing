@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/JodusNodus/node-syncthing.svg?branch=master)](https://travis-ci.org/JodusNodus/node-syncthing)
+
 ## Install:
 `npm i node-syncthing --save`
 ## Usage:
