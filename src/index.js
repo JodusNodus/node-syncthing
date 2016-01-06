@@ -1,21 +1,36 @@
 "use strict"
 import request from "request"
 //Config
-function Config({hostname="localhost", port=8384, apiKey=""}) {
+function Config({hostname="localhost", port=8384, apiKey="", eventListener=false}) {
   this.hostname = hostname
   this.port = port
   this.apiKey = apiKey
+  this.eventListener = eventListener;
 }
 Config.prototype.get = function () { return this }
 //Function
 function Syncthing(options) {
   const config = new Config(options)
+  const conf = config.get()
+  if (conf.eventListener) {
+    var since = 0;
+    const checkForEvent = () => {
+      let attr = [{key: "since", val: since}]
+      callReq({method: "events", endpoint: false, attr}, function (err, events) {
+        if (!err) {
+          let latest = events[events.length - 1]
+          console.log(latest)
+        }
+      });
+    }
+    setInterval(checkForEvent, 1000)
+  }
   function req({method="system", endpoint="ping", post=false, body="", attr}, callback) {
-    const conf = config.get()
     attr = attr ? "?"+attr.map((item) => item.key+"="+encodeURI(item.val)).join("&") : ""
+    endpoint = endpoint ? "\/"+endpoint : ""
     let options = {
       method: post ? "POST" : "GET",
-      url: `http://${conf.hostname}:${conf.port}/rest/${method}/${endpoint}${attr}`,
+      url: `http://${conf.hostname}:${conf.port}/rest/${method}${endpoint}${attr}`,
       headers: {'Content-Type': 'application/json', 'X-API-Key': conf.apiKey},
       json: true,
       body: body
@@ -28,7 +43,7 @@ function Syncthing(options) {
       }
     })
   }
-  let callReq = (options, cb) => {
+   function callReq(options, cb) {
     if(cb){
       req(options, cb);
     }else {
