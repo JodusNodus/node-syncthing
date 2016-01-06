@@ -4,7 +4,7 @@ const test = require('tape');
 const tapSpec = require('tap-spec');
 test.createStream().pipe(tapSpec()).pipe(process.stdout);
 const example = {
-  hostname: "",
+  hostname: "localhost",
   port: 8384,
   apiKey: "19A5pMYGNr0SOqzL9xoyJp7JuRbwzZq2",
   folder: "test",
