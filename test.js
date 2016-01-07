@@ -13,6 +13,8 @@ const example = {
   eventListener: true
 }
 const st = new NS(example);
+st.on("stateChanged", function (data) {
+})
 test("Callback", function (t) {
   t.plan(2);
   st.system.ping(function (err, res) {
