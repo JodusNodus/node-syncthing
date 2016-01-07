@@ -3,9 +3,14 @@ var NS = require('./index.js');
 var options = {
   hostname: "localhost",
   port: 8384,
-  apiKey: "abc123"
+  apiKey: "abc123",
+  eventListener: true
 };
 const st = new NS(options);
+//Listen for stateChanged event
+st.on("stateChanged", function (data) {
+  console.log(data)
+})
 //With Callback
 st.system.ping(function (err, res) {
   if (!err) {

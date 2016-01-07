@@ -38,7 +38,7 @@ Endpoints: _endpoint/method (options)_
   - logs
   - getUpgrade
   - setUpgrade
-* Database _(db)_
+  * Database _(db)_
   - scan _(folder)_
   - status _(folder)_
   - browse _(folder, levels, optionally a subdir)_
@@ -61,6 +61,27 @@ Data and errors can be handled with callbacks or with promises:
 * Callback _(Provide a callback function as the last argument in the method)_
   - Error argument _(returns the error or null if there was none)_
   - Data argument _(api response)_
+
+### Events
+* error _(Emmitted on event listener error)_
+* [configSaved](http://docs.syncthing.net/events/configsaved.html)
+* [deviceConnected](http://docs.syncthing.net/events/deviceconnected.html)
+* [deviceDisconnected](http://docs.syncthing.net/events/devicedisconnected.html)
+* [deviceDiscovered](http://docs.syncthing.net/events/devicediscovered.html)
+* [deviceRejected](http://docs.syncthing.net/events/devicerejected.html)
+* [downloadProgress](http://docs.syncthing.net/events/downloadprogress.html)
+* [folderCompletion](http://docs.syncthing.net/events/foldercompletion.html)
+* [folderErrors](http://docs.syncthing.net/events/foldererrors.html)
+* [folderRejected](http://docs.syncthing.net/events/folderrejected.html)
+* [folderSummary](http://docs.syncthing.net/events/foldersummary.html)
+* [itemFinished](http://docs.syncthing.net/events/itemfinished.html)
+* [itemStarted](http://docs.syncthing.net/events/itemstarted.html)
+* [localIndexUpdated](http://docs.syncthing.net/events/localindexupdated.html)
+* [ping](http://docs.syncthing.net/events/ping.html)
+* [remoteIndexUpdated](http://docs.syncthing.net/events/remoteindexupdated.html)
+* [starting](http://docs.syncthing.net/events/starting.html)
+* [startupComplete](http://docs.syncthing.net/events/startupcomplete.html)
+* [stateChanged](http://docs.syncthing.net/events/statechanged.html)
 
 ## Example:
 ```
@@ -87,15 +108,10 @@ st.system.ping().then(function (res) {
   console.log(err);
 });
 ```
-
 ## Dev
-
 ### Build
-
 `npm i`
 
 `npm run build`
-
 ### Test
-
 `npm test`
