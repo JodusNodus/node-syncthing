@@ -40,13 +40,13 @@ Endpoints: _endpoint/method (options)_
   - getUpgrade
   - setUpgrade
   * Database _(db)_
-  - scan _(folder)_
+  - scan _(folder, [subdir])_
   - status _(folder)_
-  - browse _(folder, levels, optionally a subdir)_
+  - browse _(folder, levels, [subdir])_
   - completion _(device, folder)_
   - file _(folder, file)_
   - getIgnores
-  - setIgnores _(folder, optionally ignores)_
+  - setIgnores _(folder, [ignores])_
   - need _(folder)_
   - prio _(folder, file)_
 * Statistics _(stats)_
