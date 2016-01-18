@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/JodusNodus/node-syncthing.svg?branch=master)](https://travis-ci.org/JodusNodus/node-syncthing)
+[![npm version](https://badge.fury.io/js/node-syncthing.svg)](https://badge.fury.io/js/node-syncthing)
 
 ## Install:
 `npm i node-syncthing --save`
