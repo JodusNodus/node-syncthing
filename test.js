@@ -8,6 +8,7 @@ const example = {
   port: 8384,
   apiKey: "19A5pMYGNr0SOqzL9xoyJp7JuRbwzZq2",
   folder: "default",
+  subdir: "sub",
   file: "test.txt",
   device: "KRQBQWV-KMPEWLV-LBQC5PE-I345CWF-JRQHAAZ-UFSBZY6-A57BO2R-SHLKDA6",
   eventListener: true
@@ -47,13 +48,6 @@ test("System/Status", function (t) {
 test("System/Connections", function (t) {
   t.plan(2);
   st.system.connections(function (err, res) {
-    t.equal(err, null, "No Errors");
-    t.equal(typeof res, "object", "Json response");
-  });
-});
-test("System/Status", function (t) {
-  t.plan(2);
-  st.system.status(function (err, res) {
     t.equal(err, null, "No Errors");
     t.equal(typeof res, "object", "Json response");
   });
@@ -103,8 +97,11 @@ test("System/Logs", function (t) {
   });
 });
 test("DB/Scan", function (t) {
-  t.plan(1);
+  t.plan(2);
   st.db.scan(example.folder, function (err) {
+    t.equal(err, null, "No Errors");
+  });
+  st.db.scan(example.folder, example.subdir, function (err) {
     t.equal(err, null, "No Errors");
   });
 });
@@ -117,7 +114,7 @@ test("DB/Status", function (t) {
 });
 test("DB/Browse", function (t) {
   t.plan(2);
-  st.db.browse(example.folder, 1, function (err, res) {
+  st.db.browse(example.folder, 1, example.subdir, function (err, res) {
     t.equal(err, null, "No Errors");
     t.equal(typeof res, "object", "Json response");
   });

@@ -123,15 +123,21 @@ Syncthing.prototype.system = {
 }
 //DB
 Syncthing.prototype.db = {
-  scan (folder, cb) {
+  scan (folder, subdir, cb) {
     let attr = [{key: "folder", val: folder}]
+    if (typeof subdir == "function") {
+      cb = subdir
+      subdir = null
+    }else {
+      attr.push({key: "sub", val: subdir})
+    }
     return callReq({method: "db", endpoint: "scan", attr, post: true}, cb)
   },
   status (folder, cb) {
     return callReq({method: "db", endpoint: "status"}, cb)
   },
   browse (folder, levels=1, subdir, cb) {
-    let attr = [{key: "folder", val: folder}, {key: "prefix", val: levels}]
+    let attr = [{key: "folder", val: folder}, {key: "levels", val: levels}]
     if (typeof subdir == "function") {
       cb = subdir
       subdir = null
@@ -140,7 +146,7 @@ Syncthing.prototype.db = {
       levels = null
       subdir = null
     }else {
-      attr.push({key: "subdir", val: subdir})
+      attr.push({key: "prefix", val: subdir})
     }
     return callReq({method: "db", endpoint: "browse", attr}, cb)
   },
