@@ -8,7 +8,8 @@ let config = {
   port: 8384,
   apiKey: "",
   eventListener: false,
-  constructor: function({hostname="localhost", port=8384, apiKey="", eventListener=false}) {
+  constructor: function({hostname="localhost", port=8384, apiKey="", eventListener=false, https=false}) {
+    this.https = https
     this.hostname = hostname
     this.port = port
     this.apiKey = apiKey
@@ -21,7 +22,7 @@ function req({method="system", endpoint="ping", post=false, body="", attr}, call
   endpoint = endpoint ? "\/"+endpoint : ""
   let options = {
     method: post ? "POST" : "GET",
-    url: `http://${config.hostname}:${config.port}/rest/${method}${endpoint}${attr}`,
+    url: `${config.https ? 'https' : 'http'}://${config.hostname}:${config.port}/rest/${method}${endpoint}${attr}`,
     headers: {'Content-Type': 'application/json', 'X-API-Key': config.apiKey},
     json: true,
     body: body
