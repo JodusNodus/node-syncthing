@@ -25,7 +25,8 @@ function req({method="system", endpoint="ping", post=false, body="", attr}, call
     url: `${config.https ? 'https' : 'http'}://${config.hostname}:${config.port}/rest/${method}${endpoint}${attr}`,
     headers: {'Content-Type': 'application/json', 'X-API-Key': config.apiKey},
     json: true,
-    body: body
+    body: body,
+    rejectUnauthorized: false
   }
   request(options, (err, res, body) => {
     if (!err && res.statusCode == 200) {
