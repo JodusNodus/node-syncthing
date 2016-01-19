@@ -13,6 +13,7 @@ Options: _object_
 * hostname: **domain** or **ip address** _(defaults to localhost)_
 * port: **port number** _(defaults to 8384)_
 * apiKey: **full API key** _(not necessary for non authenticated requests)_
+* https: **boolean**
 * eventListener: **boolean** _(listen to events)_
 
 ### Methods
