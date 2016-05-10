@@ -16,7 +16,6 @@ let config = {
     this.eventListener = eventListener;
   }
 }
-
 function req({method="system", endpoint="ping", post=false, body="", attr}, callback) {
   attr = attr ? "?"+attr.map((item) => item.key+"="+encodeURI(item.val)).join("&") : ""
   endpoint = endpoint ? "\/"+endpoint : ""
@@ -122,7 +121,7 @@ Syncthing.prototype.system = {
   upgrade (cb) {
     return callReq({endpoint: "upgrade", post: true}, cb)
   }
-}
+} 
 //DB
 Syncthing.prototype.db = {
   scan (folder, subdir, cb) {
@@ -136,7 +135,7 @@ Syncthing.prototype.db = {
     return callReq({method: "db", endpoint: "scan", attr, post: true}, cb)
   },
   status (folder, cb) {
-    return callReq({method: "db", endpoint: "status"}, cb)
+    return callReq({method: "db", endpoint: "status", attr: [{key: "folder", value: folder}]}, cb)
   },
   browse (folder, levels=1, subdir, cb) {
     let attr = [{key: "folder", val: folder}, {key: "levels", val: levels}]
