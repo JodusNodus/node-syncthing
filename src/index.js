@@ -135,7 +135,7 @@ Syncthing.prototype.db = {
     return callReq({method: "db", endpoint: "scan", attr, post: true}, cb)
   },
   status (folder, cb) {
-    return callReq({method: "db", endpoint: "status", attr: [{key: "folder", value: folder}]}, cb)
+    return callReq({method: "db", endpoint: "status", attr: [{key: "folder", val: folder}]}, cb)
   },
   browse (folder, levels=1, subdir, cb) {
     let attr = [{key: "folder", val: folder}, {key: "levels", val: levels}]
