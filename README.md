@@ -114,7 +114,13 @@ st.system.ping().then(function (res) {
 ## Dev
 ### Build
 `npm i`
-
 `npm run build`
+
 ### Test
-`npm test`
+
+  cd tests
+  syncthing -home . -no-browser
+
+new terminal window:
+
+  npm test
