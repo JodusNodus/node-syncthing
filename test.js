@@ -6,11 +6,11 @@ test.createStream().pipe(tapSpec()).pipe(process.stdout);
 const example = {
   hostname: "localhost",
   port: 8384,
-  apiKey: "19A5pMYGNr0SOqzL9xoyJp7JuRbwzZq2",
+  apiKey: "NRkei3LwmKAG2fNmmic77iek3ioAVcUr",
   folder: "default",
   subdir: "sub",
   file: "test.txt",
-  device: "KRQBQWV-KMPEWLV-LBQC5PE-I345CWF-JRQHAAZ-UFSBZY6-A57BO2R-SHLKDA6",
+  device: "BNR2DIW-ZPX3AYS-W4DVSQL-XSD5IU5-BNQO4JI-NDITFJQ-24OPEJO-6SKYCQO",
   eventListener: true
 }
 const st = new NS(example);
