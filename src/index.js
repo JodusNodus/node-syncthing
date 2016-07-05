@@ -17,7 +17,9 @@ let config = {
   }
 }
 function req({method="system", endpoint="ping", post=false, body="", attr}, callback) {
-  attr = attr ? "?"+attr.map((item) => item.key+"="+encodeURI(item.val)).join("&") : ""
+  attr = attr ? "?"+attr
+  .filter(item => item.val)
+  .map((item) => item.key+"="+encodeURI(item.val)).join("&") : ""
   endpoint = endpoint ? "\/"+endpoint : ""
   let options = {
     method: post ? "POST" : "GET",
