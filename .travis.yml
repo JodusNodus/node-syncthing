@@ -6,14 +6,8 @@ before_install:
   - echo "deb http://apt.syncthing.net/ syncthing release" | sudo tee /etc/apt/sources.list.d/syncthing.list
   - sudo apt-get update -qq
   - sudo apt-get install syncthing -y -qq
-  - mkdir $HOME/Sync
-  - mkdir $HOME/Sync/sub
-  - echo "Test" > $HOME/Sync/test.txt
-  - sudo wget https://gist.githubusercontent.com/JodusNodus/7b503b73a8c8a153347d/raw/c40cd329c17056580e947fb155f6f378e770c242/syncthing -O /etc/init.d/syncthing
-  - sudo chmod +x /etc/init.d/syncthing
-  - sudo update-rc.d syncthing defaults
-  - sudo /etc/init.d/syncthing stop
-  - sudo /etc/init.d/syncthing start
+  - cd test
+  - syncthing -home . -no-browser &
 node_js:
   - "5.3.0"
 before_script:
