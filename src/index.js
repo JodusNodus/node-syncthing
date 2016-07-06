@@ -122,6 +122,14 @@ Syncthing.prototype.system = {
   },
   upgrade (cb) {
     return callReq({endpoint: "upgrade", post: true}, cb)
+  },
+  pause (device, cb) {
+    let attr = [{ key: "device", val: device}]
+    return callReq({endpoint: "pause", post: true, attr}, cb)
+  },
+  resume (device, cb) {
+    let attr = [{ key: "device", val: device}]
+    return callReq({endpoint: "resume", post: true, attr}, cb)
   }
 } 
 //DB

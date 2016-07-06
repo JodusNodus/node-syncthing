@@ -41,6 +41,8 @@ Endpoints: _endpoint/method (options)_
   - logs
   - getUpgrade
   - setUpgrade
+  - pause _(device)_
+  - resume _(device)_
   * Database _(db)_
   - scan _(folder, [subdir])_
   - status _(folder)_
