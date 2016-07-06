@@ -43,7 +43,7 @@ Endpoints: _endpoint/method (options)_
   - setUpgrade
   - pause _(device)_
   - resume _(device)_
-  * Database _(db)_
+* Database _(db)_
   - scan _(folder, [subdir])_
   - status _(folder)_
   - browse _(folder, levels, [subdir])_
