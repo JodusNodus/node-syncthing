@@ -19,6 +19,8 @@
         <address>dynamic</address>
     </device>
     <gui enabled="true" tls="false">
+        <user>test</user>
+        <password>$2a$10$9Pfx.fOF3aZKEajBtPqkJuGS2KgAWJwEiL6WM6D7WOab8B6WRRPqO</password>
         <address>127.0.0.1:8384</address>
         <apikey>NRkei3LwmKAG2fNmmic77iek3ioAVcUr</apikey>
         <theme>default</theme>

@@ -14,6 +14,8 @@ Options: _object_
 * port: **port number** _(defaults to 8384)_
 * apiKey: **full API key** _(not necessary for non authenticated requests)_
 * https: **boolean**
+* username: **string**
+* password: **string**
 * eventListener: **boolean** _(listen to events)_
 
 ### Methods

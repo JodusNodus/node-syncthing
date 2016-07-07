@@ -4,7 +4,9 @@ var options = {
   hostname: "localhost",
   port: 8384,
   apiKey: "abc123",
-  eventListener: true
+  eventListener: true,
+  username: 'test',
+  password: 'abc123'
 };
 const st = new NS(options);
 //Listen for stateChanged event

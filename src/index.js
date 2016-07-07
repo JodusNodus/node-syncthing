@@ -8,12 +8,14 @@ let config = {
   port: 8384,
   apiKey: "",
   eventListener: false,
-  constructor: function({hostname="localhost", port=8384, apiKey="", eventListener=false, https=false}) {
+  constructor: function({hostname="localhost", port=8384, apiKey="", eventListener=false, https=false, username=false, password=false}) {
     this.https = https
     this.hostname = hostname
     this.port = port
     this.apiKey = apiKey
-    this.eventListener = eventListener;
+    this.eventListener = eventListener
+    this.username = username
+    this.password = password
   }
 }
 function req({method="system", endpoint="ping", post=false, body="", attr}, callback) {
@@ -26,8 +28,13 @@ function req({method="system", endpoint="ping", post=false, body="", attr}, call
     url: `${config.https ? 'https' : 'http'}://${config.hostname}:${config.port}/rest/${method}${endpoint}${attr}`,
     headers: {'Content-Type': 'application/json', 'X-API-Key': config.apiKey},
     json: true,
-    body: body,
-    rejectUnauthorized: false
+    body,
+    rejectUnauthorized: false,
+    auth: (config.username && config.password) && {
+      user: config.username,
+      pass: config.password,
+      sendImmediately: true
+    }
   }
   request(options, (err, res, body) => {
     if (!err && res.statusCode == 200) {
