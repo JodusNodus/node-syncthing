@@ -12,7 +12,7 @@ var syncthing = new NS(options);
 Options: _object_
 * hostname: **domain** or **ip address** _(defaults to localhost)_
 * port: **port number** _(defaults to 8384)_
-* apiKey: **full API key** _(not necessary for non authenticated requests)_
+* apiKey: **full API key** _(not necessary for non authenticated requests, ignored when username and password are provided)_
 * https: **boolean**
 * username: **string**
 * password: **string**
