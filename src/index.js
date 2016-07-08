@@ -18,31 +18,71 @@ let config = {
     this.password = password
   }
 }
+
+let csrfToken
+
+
 function req({method="system", endpoint="ping", post=false, body="", attr}, callback) {
-  attr = attr ? "?"+attr
-  .filter(item => item.val)
-  .map((item) => item.key+"="+encodeURI(item.val)).join("&") : ""
-  endpoint = endpoint ? "\/"+endpoint : ""
-  let options = {
-    method: post ? "POST" : "GET",
-    url: `${config.https ? 'https' : 'http'}://${config.hostname}:${config.port}/rest/${method}${endpoint}${attr}`,
-    headers: {'Content-Type': 'application/json', 'X-API-Key': config.apiKey},
-    json: true,
-    body,
-    rejectUnauthorized: false,
-    auth: (config.username && config.password) && {
-      user: config.username,
-      pass: config.password,
-      sendImmediately: true
+  const baseURL = `${config.https ? 'https' : 'http'}://${config.hostname}:${config.port}`
+
+  const requestFactory = () => {
+    attr = attr ? "?"+attr
+    .filter(item => item.val)
+    .map((item) => item.key+"="+encodeURI(item.val)).join("&") : ""
+    endpoint = endpoint ? "\/"+endpoint : ""
+
+    let options = {
+      method: post ? "POST" : "GET",
+      url: `${baseURL}/rest/${method}${endpoint}${attr}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': config.apiKey,
+        'X-CSRF-Token-EAKPT': csrfToken
+      },
+      json: true,
+      body,
+      rejectUnauthorized: false,
+      auth: (config.username && config.password) && {
+        user: config.username,
+        pass: config.password,
+        sendImmediately: true
+      },
+      jar: true
     }
+    request(options, (err, res, body) => {
+      if (!err && res.statusCode == 200) {
+        callback(err, typeof body == "string" && body ? JSON.parse(body) : body)
+      }else {
+        callback(err || res.statusCode+", "+body)
+      }
+    })
   }
-  request(options, (err, res, body) => {
-    if (!err && res.statusCode == 200) {
-      callback(err, typeof body == "string" && body ? JSON.parse(body) : body)
-    }else {
-      callback(err || res.statusCode+", "+body)
-    }
-  })
+
+  if(config.username && config.password && !csrfToken){
+    const jar = request.jar()
+    request({
+      jar,
+      rejectUnauthorized: false,
+      url: baseURL,
+      'auth': {
+        'user': config.username,
+        'pass': config.password,
+        'sendImmediately': true
+      }
+    }, (err) => {
+      if(!err){
+        const cookies = jar.getCookies(baseURL)
+        csrfToken = cookies.filter(({key}) => key == "CSRF-Token-EAKPT")[0].value
+        requestFactory()
+      }else{
+        console.log(err)
+      }
+    })
+  }else{
+    requestFactory()
+  }
+
+
 }
 function callReq(options, cb) {
   if(cb){
