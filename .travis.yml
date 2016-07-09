@@ -9,7 +9,7 @@ before_install:
   - cd test
   - syncthing -home . -no-browser &
 node_js:
-  - "5.3.0"
+  - "6.3.0"
 before_script:
   - "npm install"
   - "npm run build"
