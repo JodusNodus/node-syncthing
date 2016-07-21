@@ -2,62 +2,44 @@ import { EventEmitter } from 'events'
 import util from 'util'
 
 import request from './request'
-
-const lowerCaseFirst = str => str.charAt(0).toLowerCase() + str.slice(1)
+import eventCaller from './event-caller'
 
 function syncthing(options) {
 
   //Merge defaults with supplied options
   const config = {
-    hostname: 'localhost',
+    host: '127.0.0.1',
     port: 8384,
     apiKey: undefined,
     eventListener: false,
     username: undefined,
     password: undefined,
-    https: false,
+    https: true,
+    retries: 0,
     ...options,
+  }
+
+  if(!config.username && !config.password && !config.apiKey){
+    this.emit('No authentication method was provided')
+    return undefined
   }
 
   const req = request(config)
 
-  //Events
-  if (config.eventListener) {
-    //Become event emitter
-    util.inherits(syncthing, EventEmitter)
+  const instance = methods(req)
 
-    EventEmitter.call(this)
+  if(config.eventListener){
+    //Initialize event emitter
+    EventEmitter.call(instance)
 
-    //Event request loop
-    let iterator = (since) => {
+    //Inherit from event emitter
+    Object.assign(instance, EventEmitter.prototype)
 
-      let attr = [{key: 'since', val: since}]
-
-      req({method: 'events', endpoint: false, attr}).then((eventArr) => {
-
-        //Check for event count on first request iteration
-        if (since != 0) {
-          eventArr.forEach((e) => {
-            this.emit(lowerCaseFirst(e.type), e.data)
-          })
-        }
-
-        //Update event count
-        since = eventArr[eventArr.length -1].id
-
-        setTimeout(() => iterator(since), 100)
-
-      }).catch((err) => {
-        this.emit('error', err)
-
-        //Try to regain connection & reset event counter
-        setTimeout(() => iterator(0), 500)
-      })
-    }
-    iterator(0)
+    //Start listening
+    eventCaller.call(instance, req, config.retries)
   }
 
-  return methods(req)
+  return instance
 }
 
 const methods = (req) => ({

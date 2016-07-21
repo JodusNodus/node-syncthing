@@ -7,6 +7,8 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install syncthing -y -qq
   - cd test
+  - echo "Hello World" > test.txt
+  - mkdir random-folder
   - syncthing -home . -no-browser &
 node_js:
   - "6.3.0"

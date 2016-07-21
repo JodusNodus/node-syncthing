@@ -10,13 +10,14 @@ var syncthing = new NS(options);
 ```
 
 Options: _object_
-* hostname: **domain** or **ip address** _(defaults to localhost)_
-* port: **port number** _(defaults to 8384)_
-* apiKey: **full API key** _(not necessary for non authenticated requests, ignored when username and password are provided)_
-* https: **boolean**
-* username: **string**
-* password: **string**
-* eventListener: **boolean** _(listen to events)_
+* host: `string` _(default: `127.0.0.1`)_
+* port: `number` _(default: `8384`)_
+* apiKey: `string` _(not necessary if username and password are provided)_
+* https: `boolean` _(defaults: true)_
+* username: `string`
+* password: `string`
+* eventListener: `boolean` _(default: `false`)_
+* retries: `number` _(default: `0`)_
 
 ### Methods
 Using callbacks: `syncthing.endpoint.method(options, callback);`
@@ -92,14 +93,14 @@ Data and errors can be handled with callbacks or with promises:
 
 ## Example:
 ```
-var NS = require('./index.js');
+var syncthing = require('./index.js');
 //Options
 var options = {
-  hostname: "localhost",
+  host: "localhost",
   port: 8384,
   apiKey: "abc123"
 };
-const st = new NS(options);
+const st = syncthing(options);
 //With Callback
 st.system.ping(function (err, res) {
   if (!err) {

@@ -8,10 +8,12 @@ test.createStream().pipe(tapSpec()).pipe(process.stdout)
 const example = {
   hostname: 'localhost',
   port: 8384,
-  apiKey: 'NRkei3LwmKAG2fNmmic77iek3ioAVcUr',
-  folder: 'default',
-  subdir: 'sub',
+  apiKey: 'HsyFxJSUVmdukYAYpjAkfWnWVFmb7fr6',
+  folder: 'avjdp-tcyxn',
+  subdir: 'random-folder',
   file: 'test.txt',
+  https: true,
+  device: 'BNR2DIW-ZPX3AYS-W4DVSQL-XSD5IU5-BNQO4JI-NDITFJQ-24OPEJO-6SKYCQO',
 }
 
 const st = NS(example)
@@ -19,7 +21,7 @@ const st = NS(example)
 test('Callback', function (t) {
   t.plan(2)
   st.system.ping(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(res.ping, 'pong')
   })
 })
@@ -29,14 +31,14 @@ test('Promises', function (t) {
   st.system.ping().then(function (res) {
     t.equal(res.ping, 'pong')
   }).catch(function (err) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
   })
 })
 
 test('System/Version', function (t) {
   t.plan(2)
   st.system.version(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -44,7 +46,7 @@ test('System/Version', function (t) {
 test('System/Status', function (t) {
   t.plan(2)
   st.system.status(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -52,7 +54,7 @@ test('System/Status', function (t) {
 test('System/Connections', function (t) {
   t.plan(2)
   st.system.connections(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -60,10 +62,10 @@ test('System/Connections', function (t) {
 test('System/Config', function (t) {
   t.plan(3)
   st.system.getConfig(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
     st.system.setConfig(res, function (err) {
-      t.equal(err, null, 'No Errors')
+      t.equal(!err, true, 'No Errors')
     })
   })
 })
@@ -71,7 +73,7 @@ test('System/Config', function (t) {
 test('System/Debug', function (t) {
   t.plan(2)
   st.system.debug(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -79,7 +81,7 @@ test('System/Debug', function (t) {
 test('System/Get Discovery', function (t) {
   t.plan(2)
   st.system.getDiscovery(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -87,7 +89,7 @@ test('System/Get Discovery', function (t) {
 test('System/Errors', function (t) {
   t.plan(2)
   st.system.errors(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -95,13 +97,13 @@ test('System/Errors', function (t) {
 // test("Clear Errors", function (t) {
 //   t.plan(2);
 //   st.system.clearErrors(function (err) {
-//     t.equal(err, null, "No Errors");
+//     t.equal(!err, true, "No Errors");
 //   });
 // });
 test('System/Logs', function (t) {
   t.plan(2)
   st.system.logs(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -109,79 +111,79 @@ test('System/Logs', function (t) {
 test('System/Pause', function (t) {
   t.plan(1)
   st.system.pause(example.device, function (err) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
   })
 })
 
 test('System/Resume', function (t) {
   t.plan(1)
   st.system.resume(example.device, function (err) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
   })
 })
 
 test('DB/Scan', function (t) {
   t.plan(2)
   st.db.scan(example.folder, function (err) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
   })
   st.db.scan(example.folder, example.subdir, function (err) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
   })
 })
 test('DB/Status', function (t) {
   t.plan(2)
   st.db.status(example.folder, function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
 test('DB/Browse', function (t) {
   t.plan(2)
   st.db.browse(example.folder, 1, example.subdir, function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
 test('DB/File', function (t) {
   t.plan(2)
   st.db.file(example.folder, example.file, function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
 test('DB/Get Ignores', function (t) {
   t.plan(2)
   st.db.getIgnores(example.folder, function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
 test('Stats/Devices', function (t) {
   t.plan(2)
   st.stats.devices(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
 test('Stats/Folders', function (t) {
   t.plan(2)
   st.stats.folders(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
 test('Misc/Device ID', function (t) {
   t.plan(2)
   st.misc.deviceId(example.device, function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
 test('Misc/Lang', function (t) {
   t.plan(2)
   st.misc.lang(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
   })
 })
@@ -197,10 +199,10 @@ const stBasicAuth = NS(exampleBasicAuth)
 test('Basic Authentication', function (t) {
   t.plan(3)
   stBasicAuth.system.getConfig(function (err, res) {
-    t.equal(err, null, 'No Errors')
+    t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
     stBasicAuth.system.setConfig(res, function (err) {
-      t.equal(err, null, 'No Errors')
+      t.equal(!err, true, 'No Errors')
     })
   })
 })
