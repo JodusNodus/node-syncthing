@@ -19,7 +19,6 @@ function syncthing(options) {
   }
 
   if(!config.username && !config.password && !config.apiKey){
-    this.emit('No authentication method was provided')
     return undefined
   }
 
