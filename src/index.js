@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events'
-import util from 'util'
 
 import request from './request'
 import eventCaller from './event-caller'
@@ -8,7 +7,7 @@ function syncthing(options) {
 
   //Merge defaults with supplied options
   const config = {
-    host: '127.0.0.1',
+    host: options.hostname || '127.0.0.1',
     port: 8384,
     apiKey: undefined,
     eventListener: false,
