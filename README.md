@@ -3,10 +3,12 @@
 
 ## Install:
 `npm i node-syncthing --save`
+
 ## Usage:
 ```
-var syncthing = require('node-syncthing');
-var st = syncthing(options);
+const syncthing = require('node-syncthing')
+//Create an instance
+const st = syncthing(options)
 ```
 
 Options: _object_
@@ -17,12 +19,16 @@ Options: _object_
 * username: `string`
 * password: `string`
 * eventListener: `boolean` _(default: `false`)_
-* retries: `number` _(default: `0`)_
+* retries: `number` _(default: `0`, how many times to try after connection loss for event listener)_
 
 ### Methods
-Using callbacks: `syncthing.endpoint.method(options, callback);`
+Using callbacks:
 
-Using promises: `syncthing.endpoint.method(options).then(responseHandler).catch(errorHandler);`
+`syncthing.endpoint.method(options, callback);`
+
+Using promises:
+
+`syncthing.endpoint.method(options).then(responseHandler).catch(errorHandler);`
 
 Information about options: [Syncthing API](http://docs.syncthing.net/dev/rest.html)
 
@@ -93,40 +99,61 @@ Data and errors can be handled with callbacks or with promises:
 
 ## Example:
 ```
-var syncthing = require('node-syncthing');
+const syncthing = require('node-syncthing')
 
 //Options
-var options = {
-  host: "localhost",
+const options = {
+  host: 'localhost',
   port: 8384,
-  apiKey: "abc123"
-};
-const st = syncthing(options);
+  apiKey: 'Tj2pqyhhkNFs43r5vQsMgLtwvT94Ah4F',
+  eventListener: true,
+  retries: 10,
+}
+
+const st = syncthing(options)
+
 //With Callback
-st.system.ping(function (err, res) {
+st.system.ping((err, res) => {
   if (!err) {
-    console.log(res.ping); //pong
+    console.log(res.ping) //pong
   }else {
-    console.log(err);
+    console.error(err)
   }
-});
+})
+
 //With Promises
-st.system.ping().then(function (res) {
-  console.log(res.ping); //pong
-}).catch(function (err) {
-  console.log(err);
-});
+st.system.ping().then((res) => {
+  console.log(res.ping) //pong
+}).catch((err) => {
+  console.error(err)
+})
+
+//Listen to events
+st.on('ping', () => {
+  console.log('pong')
+})
+
+st.on('error', (err) => {
+  console.error(err)
+})
+
+//Removing event listeners will stop the event polling
+st.removeAllListeners('ping')
+st.removeAllListeners('error')
 ```
 ## Dev
 ### Build
-`npm i`
-`npm run build`
+```
+npm i
+npm run build
+```
 
 ### Test
+```
+cd test
+syncthing -home . -no-browser
+```
 
-  cd tests
-  syncthing -home . -no-browser
+In new terminal window:
 
-new terminal window:
-
-  npm test
+`npm test`
