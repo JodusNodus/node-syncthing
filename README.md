@@ -5,8 +5,8 @@
 `npm i node-syncthing --save`
 ## Usage:
 ```
-var NS = require('node-syncthing');
-var syncthing = new NS(options);
+var syncthing = require('node-syncthing');
+var st = syncthing(options);
 ```
 
 Options: _object_
@@ -93,7 +93,8 @@ Data and errors can be handled with callbacks or with promises:
 
 ## Example:
 ```
-var syncthing = require('./index.js');
+var syncthing = require('node-syncthing');
+
 //Options
 var options = {
   host: "localhost",
