@@ -24,14 +24,10 @@ export default function eventCaller(req, retries) {
   })
 
   //Event request loop
-  let count = 0
   let iterator = (since) => {
     if(stop) {
-      stop = false
       return
     }
-
-    console.log(count++)
 
     let attr = [{key: 'since', val: since}]
 
