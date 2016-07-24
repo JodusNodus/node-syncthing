@@ -108,15 +108,9 @@ const methods = (req) => ({
       let attr = [{key: 'folder', val: folder}]
       return req({method: 'db', endpoint: 'ignores', attr}, cb)
     },
-    setIgnores (folder, ignores, cb) {
+    setIgnores (folder, body, cb) {
       let attr = [{key: 'folder', val: folder}]
-      if (typeof ignores == 'function') {
-        cb = ignores
-        ignores = null
-      }else {
-        attr.push({key: 'ignores', val: ignores})
-      }
-      return req({method: 'db', endpoint: 'ignores', post: true, attr}, cb)
+      return req({method: 'db', endpoint: 'ignores', post: true, body, attr}, cb)
     },
     need (folder, cb) {
       let attr = [{key: 'folder', val: folder}]
