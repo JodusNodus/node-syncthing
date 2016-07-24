@@ -58,7 +58,7 @@ Endpoints: _endpoint/method (options)_
   - browse _(folder, levels, [subdir])_
   - completion _(device, folder)_
   - file _(folder, file)_
-  - getIgnores
+  - getIgnores _(folder)_
   - setIgnores _(folder, [ignores])_
   - need _(folder)_
   - prio _(folder, file)_
