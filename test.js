@@ -60,12 +60,15 @@ test('System/Connections', function (t) {
 })
 
 test('System/Config', function (t) {
-  t.plan(3)
+  t.plan(4)
   st.system.getConfig(function (err, res) {
     t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
     st.system.setConfig(res, function (err) {
       t.equal(!err, true, 'No Errors')
+      st.system.configInSync(function(err) {
+        t.equal(!err, true, 'No Errors')
+      })
     })
   })
 })
