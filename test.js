@@ -66,6 +66,9 @@ test('System/Config', function (t) {
     t.equal(typeof res, 'object', 'Json response')
     st.system.setConfig(res, function (err) {
       t.equal(!err, true, 'No Errors')
+      st.system.configInSync(function(err) {
+        t.equal(!err, true, 'No Errors')
+      })
     })
   })
 })

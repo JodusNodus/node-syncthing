@@ -42,6 +42,7 @@ Endpoints: _endpoint/method (options)_
   - connections
   - getConfig
   - setConfig _(config)_
+  - configInSync
   - debug
   - getDiscovery
   - setDiscovery _(device, address)_

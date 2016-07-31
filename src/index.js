@@ -50,6 +50,7 @@ const methods = (req) => ({
     connections: cb => req({endpoint: 'connections'}, cb),
     setConfig: (body, cb) => req({endpoint: 'config', post: true, body}, cb),
     getConfig: cb => req({endpoint: 'config'}, cb),
+    configInSync: cb => req({endpoint: 'config/insync'}, cb),
     debug: cb => req({endpoint: 'debug'}, cb),
     getDiscovery: cb => req({endpoint: 'discovery'}, cb),
     setDiscovery (dev, addr, cb) {
@@ -112,8 +113,21 @@ const methods = (req) => ({
       let attr = [{key: 'folder', val: folder}]
       return req({method: 'db', endpoint: 'ignores', post: true, body, attr}, cb)
     },
-    need (folder, cb) {
+    need (folder, page, perpage, cb) {
       let attr = [{key: 'folder', val: folder}]
+      if (typeof perpage == 'function') {
+        cb = perpage
+        page = null
+      }else{
+        attr.push({key: 'perpage', val: perpage})
+      }
+      if (typeof page == 'function') {
+        cb = page
+        page = null
+        perpage = null
+      }else {
+        attr.push({key: 'page', val: page})
+      }
       return req({method: 'db', endpoint: 'need', attr}, cb)
     },
     prio (folder, file, cb) {
