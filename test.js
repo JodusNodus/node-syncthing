@@ -162,6 +162,12 @@ test('DB/Get Ignores', function (t) {
     t.equal(typeof res, 'object', 'Json response')
   })
 })
+test('DB/Override', function (t) {
+  t.plan(1)
+  st.db.override(example.folder, function (err) {
+    t.equal(!err, true, 'No Errors')
+  })
+})
 test('Stats/Devices', function (t) {
   t.plan(2)
   st.stats.devices(function (err, res) {

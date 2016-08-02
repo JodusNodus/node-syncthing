@@ -63,6 +63,7 @@ Endpoints: _endpoint/method (options)_
   - setIgnores _(folder, [ignores])_
   - need _(folder)_
   - prio _(folder, file)_
+  - override _(folder)_
 * Statistics _(stats)_
   - devices
   - folders
