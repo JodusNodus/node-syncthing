@@ -197,7 +197,7 @@ test('Misc/Lang', function (t) {
   })
 })
 test('Misc/RandomString', function (t) {
-  t.plan(3)
+  t.plan(4)
   const length = 16
   st.misc.randomString(length, function (err, res) {
     t.equal(!err, true, 'No Errors')
@@ -216,7 +216,7 @@ exampleBasicAuth.password = 'test'
 const stBasicAuth = NS(exampleBasicAuth)
 
 test('Basic Authentication', function (t) {
-  t.plan(4)
+  t.plan(3)
   stBasicAuth.system.getConfig(function (err, res) {
     t.equal(!err, true, 'No Errors')
     t.equal(typeof res, 'object', 'Json response')
