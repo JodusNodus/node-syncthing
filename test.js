@@ -201,8 +201,9 @@ test('Misc/RandomString', function (t) {
   const length = 16
   st.misc.randomString(length, function (err, res) {
     t.equal(!err, true, 'No Errors')
-    t.equal(typeof res, 'string', 'String response')
-    t.equal(res.length, length, 'Is correct length')
+    t.equal(typeof res, 'object', 'Json response')
+    t.equal(typeof res.random, 'string', 'Has random string inside object')
+    t.equal(res.random.length, length, 'Random string is correct length')
   })
 })
 
