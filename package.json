@@ -1,6 +1,6 @@
 {
   "name": "node-syncthing",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Lightweight asynchronous Syncthing integration for nodejs",
   "main": "./lib/index.js",
   "scripts": {
