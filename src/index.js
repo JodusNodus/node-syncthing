@@ -150,6 +150,10 @@ const methods = (req) => ({
     },
     lang: cb => req({method: 'svc', endpoint: 'lang'}, cb),
     report: cb => req({method: 'svc', endpoint: 'report'}, cb),
+    randomString(length=32, cb) {
+      let attr = [{key: 'length', val: length}]
+      return req({method: 'svc', endpoint: 'random/string', attr}, cb)
+    },
   },
 })
 

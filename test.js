@@ -196,6 +196,15 @@ test('Misc/Lang', function (t) {
     t.equal(typeof res, 'object', 'Json response')
   })
 })
+test('Misc/RandomString', function (t) {
+  t.plan(3)
+  const length = 16
+  st.misc.randomString(length, function (err, res) {
+    t.equal(!err, true, 'No Errors')
+    t.equal(typeof res, 'string', 'String response')
+    t.equal(res.length, length, 'Is correct length')
+  })
+})
 
 const exampleBasicAuth = Object.assign({}, example)
 
