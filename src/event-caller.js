@@ -41,7 +41,9 @@ export default function eventCaller(req, retries) {
       }
 
       //Update event count
-      since = eventArr[eventArr.length -1].id
+      if (eventArr.length > 0) {
+        since = eventArr[eventArr.length -1].id
+      }
 
       //Reset tries
       tries = 0
