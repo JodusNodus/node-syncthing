@@ -1,6 +1,6 @@
 {
   "name": "node-syncthing",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "description": "Lightweight asynchronous Syncthing integration for nodejs",
   "main": "./lib/index.js",
   "scripts": {
@@ -9,20 +9,13 @@
     "build:watch": "npm run build -- --watch"
   },
   "babel": {
-    "presets": [
-      "es2015",
-      "stage-0"
-    ]
+    "presets": ["es2015", "stage-0"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JodusNodus/node-syncthing.git"
   },
-  "keywords": [
-    "syncthing",
-    "nodejs",
-    "api"
-  ],
+  "keywords": ["syncthing", "nodejs", "api"],
   "author": "thomas billiet",
   "license": "MIT",
   "bugs": {
