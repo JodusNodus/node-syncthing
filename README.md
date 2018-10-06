@@ -5,7 +5,7 @@
 `npm i node-syncthing --save`
 
 ## Usage:
-```
+```js
 const syncthing = require('node-syncthing')
 //Create an instance
 const st = syncthing(options)
@@ -100,7 +100,7 @@ Data and errors can be handled with callbacks or with promises:
 * [stateChanged](http://docs.syncthing.net/events/statechanged.html)
 
 ## Example:
-```
+```js
 const syncthing = require('node-syncthing')
 
 //Options
