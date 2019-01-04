@@ -15,6 +15,7 @@ function syncthing(options) {
     password: undefined,
     https: true,
     retries: 0,
+    events: undefined,
     ...options,
   }
 
@@ -34,7 +35,7 @@ function syncthing(options) {
     Object.assign(instance, EventEmitter.prototype)
 
     //Start listening
-    eventCaller.call(instance, req, config.retries)
+    eventCaller.call(instance, req, config.retries, config.events)
   }
 
   return instance

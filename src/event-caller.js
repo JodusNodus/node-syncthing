@@ -1,6 +1,6 @@
 const lowerCaseFirst = str => str.charAt(0).toLowerCase() + str.slice(1)
 
-export default function eventCaller(req, retries) {
+export default function eventCaller(req, retries, events) {
 
   let tries = 0
 
@@ -29,7 +29,9 @@ export default function eventCaller(req, retries) {
       return
     }
 
-    let attr = [{key: 'since', val: since}]
+    let attr = []
+    attr.push({key: 'since', val: since})
+    attr.push({key: 'events', val: events})
 
     req({method: 'events', endpoint: false, attr}).then((eventArr) => {
 
