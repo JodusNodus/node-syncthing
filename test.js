@@ -14,6 +14,7 @@ const example = {
   file: 'test.txt',
   https: true,
   device: 'BNR2DIW-ZPX3AYS-W4DVSQL-XSD5IU5-BNQO4JI-NDITFJQ-24OPEJO-6SKYCQO',
+  eventListener: true
 }
 
 const st = NS(example)
@@ -224,4 +225,21 @@ test('Basic Authentication', function (t) {
       t.equal(!err, true, 'No Errors')
     })
   })
+})
+
+test('Events', function (t) {
+  setTimeout(() => { 
+    st.db.scan(example.folder, (err) => { 
+      if(err) console.log(err) 
+    })
+  }, 250)
+  st.once('stateChanged', (data) => {
+    t.equal(typeof data, 'object', 'Json response')
+    t.end()
+  })
+})
+
+test.onFinish(() => {
+  console.log("\nAll tests ended.\n") 
+  process.exit()  
 })

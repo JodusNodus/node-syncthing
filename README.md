@@ -12,6 +12,7 @@ const st = syncthing(options)
 ```
 
 Options: _object_
+
 * host: `string` _(default: `127.0.0.1`)_
 * port: `number` _(default: `8384`)_
 * apiKey: `string` _(not necessary if username and password are provided)_
@@ -20,6 +21,7 @@ Options: _object_
 * password: `string`
 * eventListener: `boolean` _(default: `false`)_
 * retries: `number` _(default: `0`, how many times to try after connection loss for event listener)_
+* events: `string` _([event types](https://docs.syncthing.net/dev/events.html#event-types) to [filter](https://docs.syncthing.net/rest/events-get.html), leave empty to catch the default event types (default))_
 
 ### Methods
 Using callbacks:
@@ -98,6 +100,7 @@ Data and errors can be handled with callbacks or with promises:
 * [starting](http://docs.syncthing.net/events/starting.html)
 * [startupComplete](http://docs.syncthing.net/events/startupcomplete.html)
 * [stateChanged](http://docs.syncthing.net/events/statechanged.html)
+* [More event types in the docs](https://docs.syncthing.net/dev/events.html#event-types)
 
 ## Example:
 ```js
