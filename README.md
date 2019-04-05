@@ -66,6 +66,7 @@ Endpoints: _endpoint/method (options)_
   - need _(folder)_
   - prio _(folder, file)_
   - override _(folder)_
+  - revert _(folder)_
 * Statistics _(stats)_
   - devices
   - folders

@@ -139,6 +139,10 @@ const methods = (req) => ({
       let attr = [{key: 'folder', val: folder}]
       return req({method: 'db', endpoint: 'override', post:true, attr}, cb)
     },
+    revert(folder, cb) {
+      let attr = [{key: 'folder', val: folder}]
+      return req({ method: 'db', endpoint: 'revert', post: true, attr}, cb);
+    },
   },
   stats: {
     devices: cb => req({method: 'stats', endpoint: 'device'}, cb),
