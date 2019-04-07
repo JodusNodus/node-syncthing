@@ -169,6 +169,12 @@ test('DB/Override', function (t) {
     t.equal(!err, true, 'No Errors')
   })
 })
+test('DB/Revert', function (t) {
+  t.plan(1)
+  st.db.revert(example.folder, function (err) {
+    t.equal(!err, true, 'No Errors')
+  })
+})
 test('Stats/Devices', function (t) {
   t.plan(2)
   st.stats.devices(function (err, res) {
@@ -228,9 +234,9 @@ test('Basic Authentication', function (t) {
 })
 
 test('Events', function (t) {
-  setTimeout(() => { 
-    st.db.scan(example.folder, (err) => { 
-      if(err) console.log(err) 
+  setTimeout(() => {
+    st.db.scan(example.folder, (err) => {
+      if(err) console.log(err)
     })
   }, 250)
   st.once('stateChanged', (data) => {
@@ -240,6 +246,6 @@ test('Events', function (t) {
 })
 
 test.onFinish(() => {
-  console.log("\nAll tests ended.\n") 
-  process.exit()  
+  console.log("\nAll tests ended.\n")
+  process.exit()
 })
